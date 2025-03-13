@@ -10,6 +10,8 @@ app.use(
     cors({
         origin: ["http://localhost:3000"],
         credentials: true,
+        methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+        allowedHeaders: ["Content-Type", "Authorization"],
     })
 );
 
@@ -37,7 +39,7 @@ async function run() {
 
 
         app.post("/editor-content", async (req, res) => {
-            const { content, className, chapterName, chapterNo} = req.body;
+            const { content, className, chapterName, chapterNo } = req.body;
 
             if (!content) {
                 return res.status(400).send({ error: "Content is required" });
@@ -85,20 +87,6 @@ async function run() {
                 res.status(500).send({ error: "Failed to delete content" });
             }
         });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         app.get("/users", async (req, res) => {
